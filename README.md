@@ -1,3 +1,11 @@
-# My Go Project
+# Simple RESTful API with Golang
 
-Welcome to the My Go Project repository! This project contains various examples and exercises that I have learned in the Go programming language.
+This project is a simple RESTful API built using Golang. It allows for the management of categories, each identified by an ID and a name.
+
+## Features
+
+- Create a new category
+- Retrieve all categories
+- Retrieve a category by ID
+- Update a category
+- Delete a category
