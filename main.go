@@ -1,12 +1,15 @@
 package main
 
 import (
+	"net/http"
 	"rest-api/app"
 	"rest-api/controller"
+	"rest-api/helper"
 	"rest-api/repository"
 	"rest-api/service"
 
 	"github.com/go-playground/validator/v10"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/julienschmidt/httprouter"
 )
 
@@ -21,9 +24,16 @@ func main() {
 	router := httprouter.New()
 
 	router.GET("/categories", categoryController.FindAll)
-	router.GET("/categories:categoryId", categoryController.FindById)
+	router.GET("/categories/:categoryId", categoryController.FindById)
 	router.POST("/categories", categoryController.Create)
-	router.PUT("/categories:categoryId", categoryController.Update)
-	router.DELETE("/categories:categoryId", categoryController.Delete)
+	router.PUT("/categories/:categoryId", categoryController.Update)
+	router.DELETE("/categories/:categoryId", categoryController.Delete)
 
+	server := http.Server{
+		Addr: "localhost:3000",
+		Handler: router,
+	}
+
+	err := server.ListenAndServe()
+	helper.PanicIfError(err)
 }
