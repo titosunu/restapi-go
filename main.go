@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"rest-api/app"
 	"rest-api/controller"
+	"rest-api/exception"
 	"rest-api/helper"
 	"rest-api/repository"
 	"rest-api/service"
@@ -28,6 +29,8 @@ func main() {
 	router.POST("/categories", categoryController.Create)
 	router.PUT("/categories/:categoryId", categoryController.Update)
 	router.DELETE("/categories/:categoryId", categoryController.Delete)
+
+	router.PanicHandler = exception.ErrorHandler
 
 	server := http.Server{
 		Addr: "localhost:3000",
