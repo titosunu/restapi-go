@@ -6,6 +6,7 @@ import (
 	"rest-api/controller"
 	"rest-api/exception"
 	"rest-api/helper"
+	"rest-api/middleware"
 	"rest-api/repository"
 	"rest-api/service"
 
@@ -34,7 +35,7 @@ func main() {
 
 	server := http.Server{
 		Addr: "localhost:3000",
-		Handler: router,
+		Handler: middleware.NewAuthMiddleware(router),
 	}
 
 	err := server.ListenAndServe()
